@@ -1,46 +1,61 @@
-# Getting Started with Create React App
+# Guess the TV show name
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Deployed on Netlify : https://guess-the-tvshow.netlify.app/
 
-## Available Scripts
+## Motivation
 
-In the project directory, you can run:
+I have built this project as a challange after learning TypeScript to implement my newly accuired knowledge and to practice timely completion of Front-End web developer's home assignment
 
-### `npm start`
+## Description
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+The goal of the game is to guess a TV show name.
+The player sees a TV name with missing letter and should guess and fill the given TV show name,If the guess is successfull,the player gets a point and if not looses a life point
+The player has 3 life point,if the player lost all life points the game is over and can be started again
+A "HINT" button can be pressed to get a hint regarding the TV show the player is stuck on
+.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## API used
 
-### `npm test`
+https://developers.themoviedb.org
+fetched the data from:
+https://developers.themoviedb.org/3/tv/get-top-rated-tv
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Technologies used
 
-### `npm run build`
+Created with create-react-app and used the following libraries
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- React (17.0.2)
+- React-router-dom
+- Material-ui
+- TypeScript
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Usage
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+To run this project locally
 
-### `npm run eject`
+### `npm install`
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+Installs dependencies
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### `npm run start`
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+Runs the app on the local server.<br>
+Opens http://localhost:3000
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+## Screenshots
 
-## Learn More
+Web
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+<p align="center">  
+      <img alt="home" src="/public/screenshots/home-web.PNG" width="45%">
+      <img alt="gameplay" src="public/screenshots/gameplay-web.PNG" width="45%">
+      <img alt="popup" src="public/screenshots/popup-web.PNG" width="45%">
+      <img alt="gameover" src="public/screenshots/gameover-web.PNG" width="45%">
+</p>
+Mobile
+<p align="center">  
+      <img alt="mobilehome" src="public/screenshots/home-mobile.PNG.PNG" width="20%">
+      <img alt="mobilegameplay" src="public/screenshots/gameplay-mobile.PNG.PNG" width="20%">
+      <img alt="mobilepopup" src="public/screenshots/popup-mobile.PNG.PNG" width="20%">
+      <img alt="mobilegameover" src="public/screenshots/gameover-mobile.PNG.PNG" width="20%">
+</p>
