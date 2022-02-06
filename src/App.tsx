@@ -1,10 +1,10 @@
 import "./App.css";
 import { AppContext } from "./context/AppContext";
-import StartButton from "./components/start-button/StartButton";
+import StartButton from "./components/buttons/start-button/StartButton";
 import { useContext, useEffect } from "react";
 import Game from "./components/game/Game";
-import { Button } from "@mui/material";
-
+import GameOver from "./components/game-over/GameOver";
+import GameWinner from "./components/game-winner/GameWinner";
 function App() {
   const { state, dispatch } = useContext(AppContext);
   useEffect(() => {
@@ -26,14 +26,8 @@ function App() {
     <>
       {state.status === "pregame" && <StartButton />}
       {state.status === "playing" && <Game />}
-      {state.status === "game_over" && (
-        <Button
-          color="error"
-          onClick={() => {
-            dispatch({ type: "SET_STATUS", payload: "playing" });
-          }}
-        />
-      )}
+      {state.status === "game_over" && <GameOver />}
+      {state.status === "game_won" && <GameWinner />}
     </>
   );
 }

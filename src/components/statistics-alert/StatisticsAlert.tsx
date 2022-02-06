@@ -1,12 +1,14 @@
 import { Grid, Typography } from "@mui/material";
-import Dialog from "@mui/material/Dialog";
-import DialogActions from "@mui/material/DialogActions";
-import DialogContent from "@mui/material/DialogContent";
-import DialogContentText from "@mui/material/DialogContentText";
-import DialogTitle from "@mui/material/DialogTitle";
 import { useContext } from "react";
 import { AppContext } from "../../context/AppContext";
 import { StyledButton } from "../game/Game.styled";
+import { GridContainer } from "./statistics.alert.styled";
+import {
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+} from "@mui/material";
 
 const StatisticsAlert = () => {
   const { state, dispatch } = useContext(AppContext);
@@ -23,40 +25,23 @@ const StatisticsAlert = () => {
         }}
         open={state.statisticsOpen}
         onClose={handleClose}
-        aria-labelledby="alert-dialog-title"
-        aria-describedby="alert-dialog-description"
         color="error"
       >
-        <Grid
-          container
-          justifyContent="center"
-          direction="column"
-          style={{
-            width: "20rem",
-            paddingTop: "10%",
-            paddingLeft: "20%",
-            paddingRight: "20%",
-            marginBottom: "10%",
-          }}
-        >
+        <GridContainer container>
           <Grid item>
-            <DialogTitle color="white" id="alert-dialog-title">
-              {"Your Statistics:"}
-            </DialogTitle>
+            <DialogTitle color="white">{"Your Statistics:"}</DialogTitle>
           </Grid>
           <Grid item>
             <DialogContent>
-              <DialogContentText id="alert-dialog-description">
-                <Typography color="white">
-                  Guessed Right:{state.guessedRight}
-                </Typography>
-                <Typography color="white">
-                  Guessed Wrong:{state.guessedWrong}
-                </Typography>
-                <Typography color="white">
-                  Hints Used :{state.hintsTaken}
-                </Typography>
-              </DialogContentText>
+              <Typography color="white">
+                Guessed Right:{state.guessedRight}
+              </Typography>
+              <Typography color="white">
+                Guessed Wrong:{state.guessedWrong}
+              </Typography>
+              <Typography color="white">
+                Hints Used :{state.hintsTaken}
+              </Typography>
             </DialogContent>
           </Grid>
           <Grid item>
@@ -71,7 +56,7 @@ const StatisticsAlert = () => {
               </StyledButton>
             </DialogActions>
           </Grid>
-        </Grid>
+        </GridContainer>
       </Dialog>
     </div>
   );

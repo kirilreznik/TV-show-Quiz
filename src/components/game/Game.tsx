@@ -1,14 +1,19 @@
 import { useContext, useState } from "react";
 import { AppContext } from "../../context/AppContext";
 import FlipCard from "../flip-card/FlipCard";
-import { StyledGrid, ButtonsGrid, StyledButton } from "./Game.styled";
-import { TextField, Grid, Typography } from "@mui/material";
+import { TextField, Grid } from "@mui/material";
 import HintButton from "../buttons/hint-button/HintButton";
 import CheckGuessButton from "../buttons/check-guess-button/CheckGuessButton";
 import StatisticsButton from "../buttons/statistics-button/StatisticsButton";
 import StatisticsAlert from "../statistics-alert/StatisticsAlert";
+import {
+  StyledGrid,
+  ButtonsGrid,
+  StyledError,
+  StyledHint,
+} from "./Game.styled";
 const Game = () => {
-  const { state, dispatch } = useContext(AppContext);
+  const { state } = useContext(AppContext);
   const [guess, setGuess] = useState("");
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setGuess(event.target.value);
@@ -22,7 +27,7 @@ const Game = () => {
           })}
         </Grid>
       </Grid>
-      <Grid item marginTop="20px">
+      <Grid item marginTop="7%">
         <TextField
           label="YOUR GUESS HERE"
           value={guess}
@@ -32,7 +37,7 @@ const Game = () => {
             style: {
               fontSize: 20,
               color: "white",
-              paddingInline: "5rem",
+              paddingInline: "3rem",
             },
           }}
           variant="standard"
@@ -41,36 +46,23 @@ const Game = () => {
       </Grid>
       {state.message && (
         <Grid item>
-          <Typography
+          <StyledError
             variant="h1"
-            fontSize="30px"
-            marginTop="20px"
             color={state.message === "TRY AGAIN" ? "error" : "green"}
           >
             {state.message}
-          </Typography>
+          </StyledError>
         </Grid>
       )}
       <ButtonsGrid container spacing={2}>
-        <Grid item>
-          <HintButton />
-        </Grid>
-        <Grid item>
-          <CheckGuessButton guess={guess} setGuess={setGuess} />
-        </Grid>
-        <Grid item>
-          <StatisticsButton />
-        </Grid>
+        <HintButton />
+        <CheckGuessButton guess={guess} setGuess={setGuess} />
+        <StatisticsButton />
       </ButtonsGrid>
       {state.hintOpen && (
-        <Typography
-          marginTop="20px"
-          marginBottom="10px"
-          variant="subtitle1"
-          color="white"
-        >
+        <StyledHint variant="subtitle1" color="white">
           {state.currentShow?.overview}
-        </Typography>
+        </StyledHint>
       )}
       <StatisticsAlert />
     </StyledGrid>

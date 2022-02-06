@@ -1,10 +1,10 @@
 import { useContext } from "react";
-import { AppContext } from "../../context/AppContext";
-import Header from "../header/Header";
+import { AppContext } from "../../../context/AppContext";
+import Header from "../../header/Header";
 import { StyledStartButton } from "./StartButton.styled";
 
 const StartButton = () => {
-  const { state, dispatch } = useContext(AppContext);
+  const { dispatch } = useContext(AppContext);
   const handleStartGame = () => {
     dispatch({ type: "SET_STATUS", payload: "playing" });
   };

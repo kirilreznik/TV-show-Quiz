@@ -11,9 +11,10 @@ export interface AppState {
   lifesLeft: number;
   hintsTaken: number;
   hintOpen: boolean;
+  hintTaken: boolean;
   statisticsOpen: boolean;
   message: string | undefined;
-  status: "pregame" | "playing" | "error" | "game_over";
+  status: "pregame" | "playing" | "error" | "game_over" | "game_won";
 }
 
 export type AppAction =
@@ -25,11 +26,14 @@ export type AppAction =
   | { type: "INCREMENT_GUESSED_WRONG" }
   | { type: "DECREMENT_LIFE" }
   | { type: "INCREMENT_HINTS" }
-  | { type: "TOGGLE_HINT" }
+  | { type: "OPEN_HINT" }
+  | { type: "CLOSE_HINT" }
+  | { type: "SET_HINT_TAKEN" }
+  | { type: "CLEAR_HINT_TAKEN" }
   | { type: "REMOVE_GUESSED_SHOW"; payload: string }
   | {
       type: "SET_STATUS";
-      payload: "pregame" | "playing" | "error" | "game_over";
+      payload: "pregame" | "playing" | "error" | "game_over" | "game_won";
     }
   | { type: "TOGGLE_STATISTICS" }
   | { type: "SET_MESSAGE"; payload: string | undefined };
@@ -43,6 +47,7 @@ export const initialAppState: AppState = {
   lifesLeft: 3,
   hintsTaken: 0,
   hintOpen: false,
+  hintTaken: false,
   status: "pregame",
   statisticsOpen: false,
   message: undefined,
