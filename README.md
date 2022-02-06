@@ -54,8 +54,8 @@ Web
 </p>
 Mobile
 <p align="center">  
-      <img alt="mobilehome" src="public/screenshots/home-mobile.PNG.PNG" width="20%">
-      <img alt="mobilegameplay" src="public/screenshots/gameplay-mobile.PNG.PNG" width="20%">
-      <img alt="mobilepopup" src="public/screenshots/popup-mobile.PNG.PNG" width="20%">
-      <img alt="mobilegameover" src="public/screenshots/gameover-mobile.PNG.PNG" width="20%">
+      <img alt="mobilehome" src="public/screenshots/home-mobile.PNG" width="20%">
+      <img alt="mobilegameplay" src="public/screenshots/gameplay-mobile.PNG" width="20%">
+      <img alt="mobilepopup" src="public/screenshots/popup-mobile.PNG" width="20%">
+      <img alt="mobilegameover" src="public/screenshots/gameover-mobile.PNG" width="20%">
 </p>
