@@ -4,8 +4,6 @@ import getShow from "../utils/getShow";
 import hideString from "../utils/hideString";
 const AppReducer = (state = initialAppState, action: AppAction) => {
   switch (action.type) {
-    default:
-      return state;
     case "SET_DATA":
       return { ...state, shows: action.payload };
     case "CLEAR_STATE":
@@ -43,6 +41,8 @@ const AppReducer = (state = initialAppState, action: AppAction) => {
           return show.name !== action.payload;
         }),
       };
+    default:
+      return state;
   }
 };
 export default AppReducer;
