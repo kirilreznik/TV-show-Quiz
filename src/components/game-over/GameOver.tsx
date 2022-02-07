@@ -2,7 +2,7 @@ import FlipCard from "../flip-card/FlipCard";
 import { Grid } from "@mui/material";
 import StartAgainButton from "../buttons/start-again-button/StartAgainButton";
 import { StyledGrid } from "../game/Game.styled";
-const message = ["G", "A", "M", "E", " ", "O", "V", "E", "R"];
+const message = "GAME OVER".split("");
 const GameOver = () => {
   return (
     <>

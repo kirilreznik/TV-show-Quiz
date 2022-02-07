@@ -2,7 +2,7 @@ import { Grid, Typography } from "@mui/material";
 import { useContext } from "react";
 import { AppContext } from "../../context/AppContext";
 import { StyledButton } from "../game/Game.styled";
-import { GridContainer } from "./statistics.alert.styled";
+import { GridContainer } from "./Statistics.Alert.styled";
 import {
   Dialog,
   DialogActions,

@@ -2,7 +2,7 @@ import FlipCard from "../flip-card/FlipCard";
 import { Grid } from "@mui/material";
 import StartAgainButton from "../buttons/start-again-button/StartAgainButton";
 import { StyledGrid } from "../game/Game.styled";
-const message = ["G", "O", "O", "D", " ", "J", "O", "B"];
+const message = "GOOD JOB".split("");
 const GameWinner = () => {
   return (
     <>

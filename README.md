@@ -9,8 +9,8 @@ I have built this project as a challange after learning TypeScript to implement 
 ## Description
 
 The goal of the game is to guess a TV show name.
-The player sees a TV name with missing letter and should guess and fill the given TV show name,If the guess is successfull,the player gets a point and if not looses a life point
-The player has 3 life point,if the player lost all life points the game is over and can be started again
+The player sees a TV show name with missing letters and should guess and fill the given TV show name,If the guess is successfull,the player gets a point and if not looses a life point
+The player has 3 life point,if the player lost all life points the game is over and can be started again.
 A "HINT" button can be pressed to get a hint regarding the TV show the player is stuck on
 .
 
