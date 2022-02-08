@@ -1,20 +1,24 @@
 import { useContext, useState } from "react";
 import { AppContext } from "../../context/AppContext";
 import FlipCard from "../flip-card/FlipCard";
-import { TextField, Grid } from "@mui/material";
+import { Grid } from "@mui/material";
 import HintButton from "../buttons/hint-button/HintButton";
 import CheckGuessButton from "../buttons/check-guess-button/CheckGuessButton";
 import StatisticsButton from "../buttons/statistics-button/StatisticsButton";
 import StatisticsAlert from "../statistics-alert/StatisticsAlert";
-import {
-  StyledGrid,
-  ButtonsGrid,
-  StyledError,
-  StyledHint,
-} from "./Game.styled";
+import GuessInput from "../guess-input/GuessInput";
+import { StyledGrid, ButtonsGrid } from "./Game.styled";
+import ErrorMessage from "../error-message/ErrorMessage";
+import Hint from "../Hint/Hint";
+
 const Game = () => {
   const { state } = useContext(AppContext);
   const [guess, setGuess] = useState("");
+  const [statsOpen, setStatsOpen] = useState(false);
+  const [hintOpen, setHintOpen] = useState(false);
+  const toggleStats = () => {
+    setStatsOpen(!statsOpen);
+  };
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setGuess(event.target.value);
   };
@@ -27,44 +31,21 @@ const Game = () => {
           })}
         </Grid>
       </Grid>
-      <Grid item marginTop="7%">
-        <TextField
-          label="YOUR GUESS HERE"
-          value={guess}
-          fullWidth
-          focused
-          inputProps={{
-            style: {
-              fontSize: 20,
-              color: "white",
-              paddingInline: "3rem",
-            },
-          }}
-          variant="standard"
-          onChange={handleChange}
-        ></TextField>
-      </Grid>
-      {state.message && (
-        <Grid item>
-          <StyledError
-            variant="h1"
-            color={state.message === "TRY AGAIN" ? "error" : "green"}
-          >
-            {state.message}
-          </StyledError>
-        </Grid>
-      )}
+      <GuessInput guess={guess} handleChange={handleChange} />
+      {state.message && <ErrorMessage message={state.message} />}
       <ButtonsGrid container spacing={2}>
         <HintButton />
         <CheckGuessButton guess={guess} setGuess={setGuess} />
-        <StatisticsButton />
+        <StatisticsButton handleClick={toggleStats} />
       </ButtonsGrid>
-      {state.hintOpen && (
-        <StyledHint variant="subtitle1" color="white">
-          {state.currentShow?.overview}
-        </StyledHint>
-      )}
-      <StatisticsAlert />
+      {hintOpen && <Hint hintText={state.currentShow?.overview} />}
+      <StatisticsAlert
+        open={statsOpen}
+        openHandler={toggleStats}
+        guessedRight={state.guessedRight}
+        guessedWrong={state.guessedWrong}
+        hintsTaken={state.hintsTaken}
+      />
     </StyledGrid>
   );
 };

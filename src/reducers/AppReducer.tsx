@@ -22,16 +22,10 @@ const AppReducer = (state = initialAppState, action: AppAction) => {
       return { ...state, lifesLeft: state.lifesLeft - 1 };
     case "INCREMENT_HINTS":
       return { ...state, hintsTaken: state.hintsTaken + 1 };
-    case "OPEN_HINT":
-      return { ...state, hintOpen: true };
-    case "CLOSE_HINT":
-      return { ...state, hintOpen: false };
     case "SET_HINT_TAKEN":
       return { ...state, hintTaken: true };
     case "CLEAR_HINT_TAKEN":
       return { ...state, hintTaken: false };
-    case "TOGGLE_STATISTICS":
-      return { ...state, statisticsOpen: !state.statisticsOpen };
     case "SET_MESSAGE":
       return { ...state, message: action.payload };
     case "REMOVE_GUESSED_SHOW":

@@ -13,7 +13,6 @@ const CheckGuessButton = (props: {
         dispatch({ type: "SET_STATUS", payload: "game_won" });
       } else {
         dispatch({ type: "SET_MESSAGE", payload: "NICE JOB" });
-        dispatch({ type: "CLOSE_HINT" });
         dispatch({ type: "CLEAR_HINT_TAKEN" });
         props.setGuess("");
         setTimeout(() => {

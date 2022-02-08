@@ -1,6 +1,4 @@
 import { Grid, Typography } from "@mui/material";
-import { useContext } from "react";
-import { AppContext } from "../../context/AppContext";
 import { StyledButton } from "../game/Game.styled";
 import { GridContainer } from "./Statistics.Alert.styled";
 import {
@@ -10,21 +8,23 @@ import {
   DialogTitle,
 } from "@mui/material";
 
-const StatisticsAlert = () => {
-  const { state, dispatch } = useContext(AppContext);
-
-  const handleClose = () => {
-    dispatch({ type: "TOGGLE_STATISTICS" });
-  };
-
+const StatisticsAlert = (props: {
+  open: boolean;
+  openHandler: Function;
+  guessedRight: number;
+  guessedWrong: number;
+  hintsTaken: number;
+}) => {
   return (
     <div>
       <Dialog
         PaperProps={{
           style: { backgroundColor: "black", border: "0.3px solid white" },
         }}
-        open={state.statisticsOpen}
-        onClose={handleClose}
+        open={props.open}
+        onClose={() => {
+          props.openHandler();
+        }}
         color="error"
       >
         <GridContainer container>
@@ -34,13 +34,13 @@ const StatisticsAlert = () => {
           <Grid item>
             <DialogContent>
               <Typography color="white">
-                Guessed Right:{state.guessedRight}
+                Guessed Right:{props.guessedRight}
               </Typography>
               <Typography color="white">
-                Guessed Wrong:{state.guessedWrong}
+                Guessed Wrong:{props.guessedWrong}
               </Typography>
               <Typography color="white">
-                Hints Used :{state.hintsTaken}
+                Hints Used :{props.hintsTaken}
               </Typography>
             </DialogContent>
           </Grid>
@@ -50,7 +50,9 @@ const StatisticsAlert = () => {
                 variant="contained"
                 color="error"
                 autoFocus
-                onClick={handleClose}
+                onClick={() => {
+                  props.openHandler();
+                }}
               >
                 Got it
               </StyledButton>
