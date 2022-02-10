@@ -1,5 +1,5 @@
-import { FC } from "react";
 import { StyledHint } from "./Hint.styled";
+import { FC } from "react";
 
 interface HintProps {
   hintText: string | undefined;
