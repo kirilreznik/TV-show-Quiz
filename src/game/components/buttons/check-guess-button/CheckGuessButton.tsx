@@ -2,7 +2,7 @@ import React, { useContext, FC } from "react";
 import { ButtonProps } from "@mui/material";
 import { Grid } from "@mui/material";
 import { AppContext } from "../../../../context/AppContext";
-import getTvShow from "../../../../utils/getTvShow";
+import getMovie from "../../../../utils/getMovie";
 import { StatusTypes, MessageTypes } from "../../../../types/types";
 import GameActionButton from "../../../../components/game-action-button/GameActionButton";
 
@@ -20,8 +20,8 @@ const CheckGuessButton: FC<CheckGuessButtonProps> = ({
 }) => {
   const { state, setState } = useContext(AppContext);
   const handleGuess = () => {
-    if (guess === state.currentTvShow!.name) {
-      if (state.tvShows.length === 1) {
+    if (guess === state.currentMovie!.title) {
+      if (state.movies.length === 1) {
         setState({ ...state, status: StatusTypes.gameOver });
       } else {
         setMessage(MessageTypes.niceJob);
@@ -30,10 +30,10 @@ const CheckGuessButton: FC<CheckGuessButtonProps> = ({
           setState({
             ...state,
             guessedRight: state.guessedRight + 1,
-            tvShows: state.tvShows.filter((tvShow) => {
-              return tvShow.name !== state.currentTvShow!.name;
+            movies: state.movies.filter((movie) => {
+              return movie.title !== state.currentMovie!.title;
             }),
-            currentTvShow: getTvShow(state.tvShows),
+            currentMovie: getMovie(state.movies),
           });
           setMessage(MessageTypes.noMessage);
         }, 500);

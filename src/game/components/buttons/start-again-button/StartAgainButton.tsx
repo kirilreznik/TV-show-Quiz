@@ -1,28 +1,30 @@
 import { StyledStartAgainButton } from "./StartAgianButton.styled";
 import { useContext } from "react";
 import { AppContext, initialAppState } from "../../../../context/AppContext";
-import { StatusTypes } from "../../../../types/types";
-import getTvShow from "../../../../utils/getTvShow";
+import { Movie, StatusTypes } from "../../../../types/types";
+import getMovie from "../../../../utils/getMovie";
 import hideString from "../../../../utils/hideString";
 
 const StartAgainButton = () => {
   const { state, setState } = useContext(AppContext);
   const handleStartAgain = () => {
     fetch(
-      "https://api.themoviedb.org/3/tv/top_rated?api_key=8df65f7dc852b216b40bf6ab3cabb73c&language=en-US&page=1"
+      "https://api.themoviedb.org/3/movie/top_rated?api_key=8df65f7dc852b216b40bf6ab3cabb73c&language=en-US&page=1&region=US"
     )
       .then((response) => response.json())
       .then(({ results }) => {
-        const tvShows = results;
-        return tvShows;
+        const movies = results.filter((result: Movie) => {
+          return result.original_language === "en";
+        });
+        return movies;
       })
-      .then((tvShows) => {
-        const tvShow = getTvShow(tvShows);
+      .then((movies) => {
+        const movie = getMovie(movies);
         setState({
           ...initialAppState,
-          tvShows: tvShows,
-          currentTvShow: tvShow,
-          hiddenString: hideString(state.currentTvShow!.name),
+          movies: movies,
+          currentMovie: movie,
+          hiddenString: hideString(state.currentMovie!.title),
           status: StatusTypes.playing,
         });
       });

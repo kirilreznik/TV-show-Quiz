@@ -2,8 +2,8 @@ import React, { createContext, useState } from "react";
 import { AppState, StatusTypes } from "../types/types";
 
 export const initialAppState: AppState = {
-  tvShows: [],
-  currentTvShow: undefined,
+  movies: [],
+  currentMovie: undefined,
   hiddenString: undefined!,
   guessedRight: 0,
   guessedWrong: 0,

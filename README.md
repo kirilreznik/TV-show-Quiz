@@ -1,4 +1,4 @@
-# Guess the TV show name
+# Guess the movie name
 
 Deployed on Netlify : https://guess-the-tvshow.netlify.app/
 
@@ -8,17 +8,17 @@ I have built this project as a challange after learning TypeScript to implement 
 
 ## Description
 
-The goal of the game is to guess a TV show name.
-The player sees a TV show name with missing letters and should guess and fill the given TV show name,If the guess is successfull,the player gets a point and if not looses a life point
+The goal of the game is to guess a movie title.
+The player sees a movie name with missing letters and should guess and fill the given movie name,If the guess is successfull,the player gets a point and if not looses a life point
 The player has 3 life point,if the player lost all life points the game is over and can be started again.
-A "HINT" button can be pressed to get a hint regarding the TV show the player is stuck on
+A "HINT" button can be pressed to get a hint regarding the movie the player is stuck on
 .
 
 ## API used
 
 https://developers.themoviedb.org
 fetched the data from:
-https://developers.themoviedb.org/3/tv/get-top-rated-tv
+https://api.themoviedb.org/3/movie/top_rated
 
 ## Technologies used
 

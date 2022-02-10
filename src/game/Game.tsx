@@ -65,7 +65,7 @@ const Game: FC<GameProps> = ({
         />
         <StatisticsButton onClick={toggleStats} />
       </ButtonsGrid>
-      {hintOpen && <Hint hintText={state.currentTvShow?.overview} />}
+      {hintOpen && <Hint hintText={state.currentMovie?.overview} />}
       <StatisticsAlert
         open={statsOpen}
         openHandler={toggleStats}

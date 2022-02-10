@@ -1,21 +1,21 @@
-export interface Show {
-  backdrop_path: string | null;
-  first_air_date: string;
+export interface Movie {
+  poster_path: string;
+  adult: boolean;
+  overview: string;
+  release_date: string;
   genre_ids: number[];
   id: number;
-  name: string;
-  origin_country: string[];
+  original_title: string;
   original_language: string;
-  original_name: string;
-  overview: string;
-  popularity: number;
-  poster_path: string;
-  vote_average: number;
+  title: string;
+  backdrop_path: string | null;
   vote_count: number;
+  video: boolean;
+  vote_average: number;
 }
 
-export type CurrentShow = {
-  name: string;
+export type CurrentMovie = {
+  title: string;
   overview: string;
 };
 
@@ -39,8 +39,8 @@ export enum StatusTypes {
 }
 
 export interface AppState {
-  tvShows: Show[];
-  currentTvShow: { name: string; overview: string } | undefined;
+  movies: Movie[];
+  currentMovie: { title: string; overview: string } | undefined;
   hiddenString: string[] | undefined;
   guessedRight: number;
   guessedWrong: number;

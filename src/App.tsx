@@ -4,9 +4,9 @@ import StartGameButton from "./game/components/buttons/start-game-button/StartGa
 import { useContext, useEffect, useState } from "react";
 import Game from "./game/Game";
 import GameOver from "./components/game-over/GameOver";
-import getTvShow from "./utils/getTvShow";
+import getMovie from "./utils/getMovie";
 import hideString from "./utils/hideString";
-import { StatusTypes, MessageTypes, GameOverTypes } from "./types/types";
+import { StatusTypes, MessageTypes, GameOverTypes, Movie } from "./types/types";
 const App = () => {
   const { state, setState } = useContext(AppContext);
   const [hintOpen, setHintOpen] = useState(false);
@@ -14,32 +14,34 @@ const App = () => {
   const [message, setMessage] = useState(MessageTypes.noMessage);
   useEffect(() => {
     fetch(
-      "https://api.themoviedb.org/3/tv/top_rated?api_key=8df65f7dc852b216b40bf6ab3cabb73c&language=en-US&page=1"
+      "https://api.themoviedb.org/3/movie/top_rated?api_key=8df65f7dc852b216b40bf6ab3cabb73c&language=en-US&page=1&region=US"
     )
       .then((response) => response.json())
-      .then((data) => {
-        const tvShows = data.results;
-        return tvShows;
+      .then(({ results }) => {
+        const movies = results.filter((result: Movie) => {
+          return result.original_language === "en";
+        });
+        return movies;
       })
-      .then((tvShows) => {
+      .then((movies) => {
         setState({
           ...state,
-          currentTvShow: getTvShow(tvShows),
-          tvShows: tvShows,
+          currentMovie: getMovie(movies),
+          movies: movies,
         });
       });
   }, []);
   useEffect(() => {
-    if (state.currentTvShow) {
+    if (state.currentMovie) {
       setState({
         ...state,
-        hiddenString: hideString(state.currentTvShow.name),
+        hiddenString: hideString(state.currentMovie.title),
       });
       setHintOpen(false);
       setHintTaken(false);
       setMessage(MessageTypes.noMessage);
     }
-  }, [state.currentTvShow]);
+  }, [state.currentMovie]);
   return (
     <>
       {state.status === StatusTypes.preGame && <StartGameButton />}
@@ -56,7 +58,7 @@ const App = () => {
       {state.status === StatusTypes.gameOver && (
         <GameOver
           message={
-            state.tvShows.length > 1
+            state.movies.length > 1
               ? GameOverTypes.looser
               : GameOverTypes.winner
           }
