@@ -1,6 +1,6 @@
 # Guess the movie name
 
-Deployed on Netlify : https://guess-the-tvshow.netlify.app/
+Deployed on Netlify : https://movie-name-game.netlify.app/
 
 ## Motivation
 
