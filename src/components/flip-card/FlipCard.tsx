@@ -1,8 +1,13 @@
 import ReactCardFlip from "react-card-flip";
-import { useEffect, useState } from "react";
+import { useEffect, useState, FC } from "react";
 import { FlipPaper, LetterContainer, Letter } from "./FlipCard.styled";
 import { Grid } from "@mui/material";
-const FlipCard = (props: { letter: string }) => {
+
+interface FlipCardProps {
+  letter: string;
+}
+
+const FlipCard: FC<FlipCardProps> = ({ letter }) => {
   const [isFlipped, setIsFlipped] = useState(false);
   const handleClick = () => {
     setIsFlipped(!isFlipped);
@@ -18,7 +23,7 @@ const FlipCard = (props: { letter: string }) => {
         <FlipPaper onMouseEnter={handleClick}></FlipPaper>
         <FlipPaper onMouseEnter={handleClick}>
           <LetterContainer>
-            <Letter variant="h2">{props.letter}</Letter>
+            <Letter variant="h2">{letter}</Letter>
           </LetterContainer>
         </FlipPaper>
       </ReactCardFlip>

@@ -1,4 +1,4 @@
-import { Button, Grid } from "@mui/material";
+import { Grid } from "@mui/material";
 import { styled } from "@mui/system";
 
 export const StyledGrid = styled(Grid)`
@@ -25,9 +25,4 @@ export const ButtonsGrid = styled(Grid)`
     width: 50vw;
     margin-top: 20%;
   }
-`;
-
-export const StyledButton = styled(Button)`
-  width: 12.5rem;
-  border-radius: 15px;
 `;

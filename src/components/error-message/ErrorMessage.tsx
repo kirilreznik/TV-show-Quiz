@@ -1,13 +1,19 @@
+import { FC } from "react";
 import { StyledError } from "./ErrorMessage.styled";
 import { Grid } from "@mui/material";
-const ErrorMessage = (props: { message: string }) => {
+import { MessageTypes } from "../../types/types";
+
+interface ErrorMessageProps {
+  message: string;
+}
+const ErrorMessage: FC<ErrorMessageProps> = ({ message }) => {
   return (
     <Grid item>
       <StyledError
         variant="h1"
-        color={props.message === "TRY AGAIN" ? "error" : "green"}
+        color={message === MessageTypes.tryAgain ? "error" : "green"}
       >
-        {props.message}
+        {message}
       </StyledError>
     </Grid>
   );

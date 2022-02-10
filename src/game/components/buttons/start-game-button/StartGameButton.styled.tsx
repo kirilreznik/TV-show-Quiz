@@ -1,7 +1,7 @@
-import { Button } from "@mui/material";
 import { styled } from "@mui/system";
+import { Button } from "@mui/material";
 
-export const StyledStartButton = styled(Button)`
+export const StyledStartGameButton = styled(Button)`
   position: absolute;
   top: 60vh;
   left: 15vw;

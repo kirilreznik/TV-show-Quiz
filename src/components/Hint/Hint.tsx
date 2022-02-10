@@ -1,8 +1,14 @@
+import { FC } from "react";
 import { StyledHint } from "./Hint.styled";
-const Hint = (props: { hintText: string | undefined }) => {
+
+interface HintProps {
+  hintText: string | undefined;
+}
+
+const Hint: FC<HintProps> = ({ hintText }) => {
   return (
     <StyledHint variant="subtitle1" color="white">
-      {props.hintText}
+      {hintText}
     </StyledHint>
   );
 };

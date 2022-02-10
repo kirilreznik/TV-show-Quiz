@@ -1,5 +1,5 @@
 import { Grid, Typography } from "@mui/material";
-import { StyledButton } from "../game/Game.styled";
+import GameActionButton from "../../../components/game-action-button/GameActionButton";
 import { GridContainer } from "./Statistics.Alert.styled";
 import {
   Dialog,
@@ -46,16 +46,14 @@ const StatisticsAlert = (props: {
           </Grid>
           <Grid item>
             <DialogActions>
-              <StyledButton
-                variant="contained"
-                color="error"
+              <GameActionButton
                 autoFocus
                 onClick={() => {
                   props.openHandler();
                 }}
               >
                 Got it
-              </StyledButton>
+              </GameActionButton>
             </DialogActions>
           </Grid>
         </GridContainer>
