@@ -47,15 +47,15 @@ Opens http://localhost:3000
 Web
 
 <p align="center">  
-      <img alt="home" src="/public/screenshots/home-web.PNG" width="45%">
-      <img alt="gameplay" src="public/screenshots/gameplay-web.PNG" width="45%">
-      <img alt="popup" src="public/screenshots/popup-web.PNG" width="45%">
-      <img alt="gameover" src="public/screenshots/gameover-web.PNG" width="45%">
+      <img alt="home" src="/public/app-screenshots/home-web.PNG" width="45%">
+      <img alt="gameplay" src="public/app-screenshots/gameplay-web.PNG" width="45%">
+      <img alt="popup" src="public/app-screenshots/popup-web.PNG" width="45%">
+      <img alt="gameover" src="public/app-screenshots/gameover-web.PNG" width="45%">
 </p>
 Mobile
 <p align="center">  
-      <img alt="mobilehome" src="public/screenshots/home-mobile.PNG" width="20%">
-      <img alt="mobilegameplay" src="public/screenshots/gameplay-mobile.PNG" width="20%">
-      <img alt="mobilepopup" src="public/screenshots/popup-mobile.PNG" width="20%">
-      <img alt="mobilegameover" src="public/screenshots/gameover-mobile.PNG" width="20%">
+      <img alt="mobilehome" src="public/app-screenshots/home-mobile.PNG" width="20%">
+      <img alt="mobilegameplay" src="public/app-screenshots/gameplay-mobile.PNG" width="20%">
+      <img alt="mobilepopup" src="public/app-screenshots/popup-mobile.PNG" width="20%">
+      <img alt="mobilegameover" src="public/app-screenshots/gameover-mobile.PNG" width="20%">
 </p>
