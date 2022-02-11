@@ -9,7 +9,7 @@ import StatisticsAlert from "./components/statistics-alert/StatisticsAlert";
 import GuessInput from "./components/guess-input/GuessInput";
 import { StyledGrid, ButtonsGrid } from "./Game.styled";
 import ErrorMessage from "../components/error-message/ErrorMessage";
-import Hint from "../components/hint/Hint";
+import Hint from "../components/game-hint/Hint";
 import { MessageTypes } from "../types/types";
 
 interface GameProps {
