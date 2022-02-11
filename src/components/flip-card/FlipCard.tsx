@@ -7,7 +7,13 @@ interface FlipCardProps {
   letter: string;
 }
 
+enum VisibleTypes {
+  hidden = "hidden",
+  visible = "visible",
+}
+
 const FlipCard: FC<FlipCardProps> = ({ letter }) => {
+  const visible = letter === " " ? VisibleTypes.hidden : VisibleTypes.visible;
   const [isFlipped, setIsFlipped] = useState(false);
   const handleClick = () => {
     setIsFlipped(!isFlipped);
@@ -18,7 +24,7 @@ const FlipCard: FC<FlipCardProps> = ({ letter }) => {
     }, 40);
   });
   return (
-    <Grid item>
+    <Grid item sx={{ visibility: visible }}>
       <ReactCardFlip isFlipped={isFlipped} flipDirection="vertical">
         <FlipPaper onMouseEnter={handleClick}></FlipPaper>
         <FlipPaper onMouseEnter={handleClick}>

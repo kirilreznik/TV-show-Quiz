@@ -20,7 +20,7 @@ const CheckGuessButton: FC<CheckGuessButtonProps> = ({
 }) => {
   const { state, setState } = useContext(AppContext);
   const handleGuess = () => {
-    if (guess === state.currentMovie!.title) {
+    if (guess.toLowerCase() === state.currentMovie!.title.toLowerCase()) {
       if (state.movies.length === 1) {
         setState({ ...state, status: StatusTypes.gameOver });
       } else {
