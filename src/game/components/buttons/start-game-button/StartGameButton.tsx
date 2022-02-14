@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { AppContext } from "../../../../context/AppContext";
-import { StatusTypes } from "../../../../types/types";
+import { StatusTypes } from "../../../../types";
 import Header from "../../header/Header";
 import { StyledStartGameButton } from "./StartGameButton.styled";
 const StyledStartButton = () => {

@@ -1,8 +1,8 @@
 import { StyledStartAgainButton } from "./StartAgianButton.styled";
 import { useContext } from "react";
 import { AppContext, initialAppState } from "../../../../context/AppContext";
-import { Movie, StatusTypes } from "../../../../types/types";
-import getMovie from "../../../../utils/getMovie";
+import { Movie, StatusTypes } from "../../../../types";
+import getRandomMovie from "../../../../utils/getRandomMovie";
 import hideString from "../../../../utils/hideString";
 
 const StartAgainButton = () => {
@@ -16,10 +16,7 @@ const StartAgainButton = () => {
         const movies = results.filter((result: Movie) => {
           return result.original_language === "en";
         });
-        return movies;
-      })
-      .then((movies) => {
-        const movie = getMovie(movies);
+        const movie = getRandomMovie(movies);
         setState({
           ...initialAppState,
           movies: movies,

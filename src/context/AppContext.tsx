@@ -1,5 +1,15 @@
 import React, { createContext, useState } from "react";
-import { AppState, StatusTypes } from "../types/types";
+import { Movie, StatusTypes } from "../types";
+
+export interface AppState {
+  movies: Movie[];
+  currentMovie: { title: string; overview: string } | undefined;
+  hiddenString: string[] | undefined;
+  guessedRight: number;
+  guessedWrong: number;
+  hintsTaken: number;
+  status: StatusTypes;
+}
 
 export const initialAppState: AppState = {
   movies: [],

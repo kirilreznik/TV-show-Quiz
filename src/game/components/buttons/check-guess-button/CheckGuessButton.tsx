@@ -2,8 +2,8 @@ import React, { useContext, FC } from "react";
 import { ButtonProps } from "@mui/material";
 import { Grid } from "@mui/material";
 import { AppContext } from "../../../../context/AppContext";
-import getMovie from "../../../../utils/getMovie";
-import { StatusTypes, MessageTypes } from "../../../../types/types";
+import getRandomMovie from "../../../../utils/getRandomMovie";
+import { StatusTypes, MessageTypes } from "../../../../types";
 import GameActionButton from "../../../../components/game-action-button/GameActionButton";
 
 interface CheckGuessButtonProps extends ButtonProps {
@@ -20,33 +20,37 @@ const CheckGuessButton: FC<CheckGuessButtonProps> = ({
 }) => {
   const { state, setState } = useContext(AppContext);
   const handleGuess = () => {
-    if (guess.toLowerCase() === state.currentMovie!.title.toLowerCase()) {
-      if (state.movies.length === 1) {
-        setState({ ...state, status: StatusTypes.gameOver });
+    if (guess === "") {
+      setMessage(MessageTypes.noGuess);
+    } else {
+      if (guess.toLowerCase() === state.currentMovie!.title.toLowerCase()) {
+        if (state.movies.length === 1) {
+          setState({ ...state, status: StatusTypes.gameOver });
+        } else {
+          setMessage(MessageTypes.niceJob);
+          setGuess(MessageTypes.noMessage);
+          setTimeout(() => {
+            setState({
+              ...state,
+              guessedRight: state.guessedRight + 1,
+              movies: state.movies.filter((movie) => {
+                return movie.title !== state.currentMovie!.title;
+              }),
+              currentMovie: getRandomMovie(state.movies),
+            });
+            setMessage(MessageTypes.noMessage);
+          }, 500);
+        }
       } else {
-        setMessage(MessageTypes.niceJob);
-        setGuess(MessageTypes.noMessage);
-        setTimeout(() => {
+        if (state.guessedWrong === 2) {
           setState({
             ...state,
-            guessedRight: state.guessedRight + 1,
-            movies: state.movies.filter((movie) => {
-              return movie.title !== state.currentMovie!.title;
-            }),
-            currentMovie: getMovie(state.movies),
+            status: StatusTypes.gameOver,
           });
-          setMessage(MessageTypes.noMessage);
-        }, 500);
+        } else setState({ ...state, guessedWrong: state.guessedWrong + 1 });
+        setMessage(MessageTypes.tryAgain);
+        setGuess(MessageTypes.noMessage);
       }
-    } else {
-      if (state.guessedWrong === 2) {
-        setState({
-          ...state,
-          status: StatusTypes.gameOver,
-        });
-      } else setState({ ...state, guessedWrong: state.guessedWrong + 1 });
-      setMessage(MessageTypes.tryAgain);
-      setGuess(MessageTypes.noMessage);
     }
   };
   return (

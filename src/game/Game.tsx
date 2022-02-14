@@ -10,31 +10,31 @@ import GuessInput from "./components/guess-input/GuessInput";
 import { StyledGrid, ButtonsGrid } from "./Game.styled";
 import ErrorMessage from "../components/error-message/ErrorMessage";
 import Hint from "../components/game-hint/Hint";
-import { MessageTypes } from "../types/types";
+import { MessageTypes } from "../types";
 
 interface GameProps {
-  hintOpen: boolean;
+  isHintOpen: boolean;
   setHintOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  hintTaken: boolean;
+  isHintTaken: boolean;
   setHintTaken: React.Dispatch<React.SetStateAction<boolean>>;
-  message: string;
-  setMessage: React.Dispatch<React.SetStateAction<MessageTypes>>;
+  guessCheckMessage: string;
+  setGuessCheckMessage: React.Dispatch<React.SetStateAction<MessageTypes>>;
 }
 
 const Game: FC<GameProps> = ({
-  hintOpen,
+  isHintOpen,
   setHintOpen,
-  hintTaken,
+  isHintTaken,
   setHintTaken,
-  message,
-  setMessage,
+  guessCheckMessage,
+  setGuessCheckMessage,
 }) => {
   const { state } = useContext(AppContext);
   const [guess, setGuess] = useState("");
-  const [statsOpen, setStatsOpen] = useState(false);
+  const [isStatsOpen, setStatsOpen] = useState(false);
 
   const toggleStats = () => {
-    setStatsOpen(!statsOpen);
+    setStatsOpen(!isStatsOpen);
   };
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setGuess(event.target.value);
@@ -49,25 +49,25 @@ const Game: FC<GameProps> = ({
         </Grid>
       </Grid>
       <GuessInput guess={guess} handleChange={handleChange} />
-      {message && <ErrorMessage message={message} />}
+      {guessCheckMessage && <ErrorMessage message={guessCheckMessage} />}
       <ButtonsGrid container spacing={2}>
         <HintButton
-          hintOpen={hintOpen}
+          hintOpen={isHintOpen}
           setHintOpen={setHintOpen}
-          hintTaken={hintTaken}
+          hintTaken={isHintTaken}
           setHintTaken={setHintTaken}
         />
         <CheckGuessButton
           guess={guess}
           setGuess={setGuess}
-          message={message}
-          setMessage={setMessage}
+          message={guessCheckMessage}
+          setMessage={setGuessCheckMessage}
         />
         <StatisticsButton onClick={toggleStats} />
       </ButtonsGrid>
-      {hintOpen && <Hint hintText={state.currentMovie?.overview} />}
+      {isHintOpen && <Hint hintText={state.currentMovie?.overview} />}
       <StatisticsAlert
-        open={statsOpen}
+        open={isStatsOpen}
         openHandler={toggleStats}
         guessedRight={state.guessedRight}
         guessedWrong={state.guessedWrong}

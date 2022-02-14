@@ -5,14 +5,7 @@ import { ButtonProps } from "@mui/material";
 const GameActionButton: FC<ButtonProps> = ({ children, onClick }) => {
   return (
     <>
-      <StyledButton
-        color="error"
-        variant="contained"
-        size="large"
-        onClick={onClick}
-      >
-        {children}
-      </StyledButton>
+      <StyledButton onClick={onClick}>{children}</StyledButton>
     </>
   );
 };

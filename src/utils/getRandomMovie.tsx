@@ -1,6 +1,6 @@
-import { Movie, CurrentMovie } from "../types/types";
+import { Movie, CurrentMovie } from "../types";
 
-const getMovie = (moviesArray: Movie[]): CurrentMovie => {
+const getRandomMovie = (moviesArray: Movie[]): CurrentMovie => {
   const randomNum = Math.floor(Math.random() * moviesArray.length);
   return {
     title: moviesArray[randomNum].title,
@@ -8,4 +8,4 @@ const getMovie = (moviesArray: Movie[]): CurrentMovie => {
   };
 };
 
-export default getMovie;
+export default getRandomMovie;

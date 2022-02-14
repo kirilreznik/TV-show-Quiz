@@ -22,6 +22,7 @@ export type CurrentMovie = {
 export enum MessageTypes {
   tryAgain = "TRY AGAIN",
   niceJob = "NICE JOB",
+  noGuess = "PLEASE ENTER GUESS",
   noMessage = "",
 }
 
@@ -36,14 +37,4 @@ export enum StatusTypes {
   error = "error",
   gameOver = "game_over",
   gameWon = "game_won",
-}
-
-export interface AppState {
-  movies: Movie[];
-  currentMovie: { title: string; overview: string } | undefined;
-  hiddenString: string[] | undefined;
-  guessedRight: number;
-  guessedWrong: number;
-  hintsTaken: number;
-  status: StatusTypes;
 }
