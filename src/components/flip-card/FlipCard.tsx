@@ -15,14 +15,17 @@ enum VisibleTypes {
 const FlipCard: FC<FlipCardProps> = ({ letter }) => {
   const visible = letter === " " ? VisibleTypes.hidden : VisibleTypes.visible;
   const [isFlipped, setIsFlipped] = useState(false);
-  const handleClick = () => {
-    setIsFlipped(!isFlipped);
-  };
+
   useEffect(() => {
     setTimeout(() => {
       setIsFlipped(true);
     }, 40);
   });
+
+  const handleClick = () => {
+    setIsFlipped(!isFlipped);
+  };
+
   return (
     <Grid item sx={{ visibility: visible }}>
       <ReactCardFlip isFlipped={isFlipped} flipDirection="vertical">

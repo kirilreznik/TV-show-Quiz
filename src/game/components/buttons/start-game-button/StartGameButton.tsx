@@ -1,22 +1,21 @@
-import { useContext } from "react";
-import { AppContext } from "../../../../context/AppContext";
+import { FC } from "react";
 import { StatusTypes } from "../../../../types";
 import Header from "../../header/Header";
 import { StyledStartGameButton } from "./StartGameButton.styled";
-const StyledStartButton = () => {
-  const { state, setState } = useContext(AppContext);
+
+interface StyledStartButtonProps {
+  setStatus: React.Dispatch<React.SetStateAction<StatusTypes>>;
+}
+
+const StyledStartButton: FC<StyledStartButtonProps> = ({ setStatus }) => {
   const handleStartGame = () => {
-    setState({ ...state, status: StatusTypes.playing });
+    setStatus(StatusTypes.playing);
   };
+
   return (
     <>
       <Header />
-      <StyledStartGameButton
-        onClick={handleStartGame}
-        variant="contained"
-        size="large"
-        color="error"
-      >
+      <StyledStartGameButton onClick={handleStartGame}>
         Play Now
       </StyledStartGameButton>
     </>

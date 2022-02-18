@@ -1,14 +1,19 @@
-import { FC } from "react";
+import { FC, useContext } from "react";
 import FlipCard from "../flip-card/FlipCard";
 import { Grid } from "@mui/material";
 import StartAgainButton from "../../game/components/buttons/start-again-button/StartAgainButton";
 import { StyledGrid } from "../../game/Game.styled";
+import { StatusTypes } from "../../types/index";
+import { MoviesContext } from "../../context/MovieContext";
 
 interface GameOverProps {
-  message: string;
+  setStatus: React.Dispatch<React.SetStateAction<StatusTypes>>;
 }
 
-const GameOver: FC<GameOverProps> = ({ message }) => {
+const GameOver: FC<GameOverProps> = ({ setStatus }) => {
+  const { movies } = useContext(MoviesContext);
+  const message = movies.length === 1 ? "GOOD JOB" : "GAME OVER";
+
   return (
     <>
       <StyledGrid container direction="column" marginTop="18rem">
@@ -23,7 +28,7 @@ const GameOver: FC<GameOverProps> = ({ message }) => {
             })}
           </Grid>
         </Grid>
-        <StartAgainButton />
+        <StartAgainButton setStatus={setStatus} />
       </StyledGrid>
     </>
   );

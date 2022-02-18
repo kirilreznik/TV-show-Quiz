@@ -1,11 +1,10 @@
 import { StyledHint } from "./Hint.styled";
-import { FC } from "react";
 
 interface HintProps {
   hintText: string | undefined;
 }
 
-const Hint: FC<HintProps> = ({ hintText }) => {
+const Hint: (props: HintProps) => JSX.Element = ({ hintText }) => {
   return (
     <StyledHint variant="subtitle1" color="white">
       {hintText}

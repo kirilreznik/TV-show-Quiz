@@ -1,58 +1,73 @@
 import React, { useContext, FC } from "react";
 import { ButtonProps } from "@mui/material";
 import { Grid } from "@mui/material";
-import { AppContext } from "../../../../context/AppContext";
+import { GameContext } from "../../../../context/GameContext";
+import { MoviesContext } from "../../../../context/MovieContext";
 import getRandomMovie from "../../../../utils/getRandomMovie";
 import { StatusTypes, MessageTypes } from "../../../../types";
 import GameActionButton from "../../../../components/game-action-button/GameActionButton";
 
 interface CheckGuessButtonProps extends ButtonProps {
+  message: string;
+  setGuessCheckMessage: React.Dispatch<React.SetStateAction<MessageTypes>>;
+  setStatus: React.Dispatch<React.SetStateAction<StatusTypes>>;
   guess: string;
   setGuess: React.Dispatch<React.SetStateAction<string>>;
-  message: string;
-  setMessage: React.Dispatch<React.SetStateAction<MessageTypes>>;
 }
 
 const CheckGuessButton: FC<CheckGuessButtonProps> = ({
+  setGuessCheckMessage,
+  setStatus,
   guess,
   setGuess,
-  setMessage,
 }) => {
-  const { state, setState } = useContext(AppContext);
+  const { movies, setMovies, currentMovie, setCurrentMovie } =
+    useContext(MoviesContext);
+
+  const {
+    setHintOpen,
+    setHintTaken,
+    guessedWrong,
+    guessedRight,
+    setGuessedRight,
+    setGuessedWrong,
+  } = useContext(GameContext);
+
   const handleGuess = () => {
     if (guess === "") {
-      setMessage(MessageTypes.noGuess);
+      setGuessCheckMessage(MessageTypes.noGuess);
     } else {
-      if (guess.toLowerCase() === state.currentMovie!.title.toLowerCase()) {
-        if (state.movies.length === 1) {
-          setState({ ...state, status: StatusTypes.gameOver });
+      if (guess.toLowerCase() === currentMovie!.title.toLowerCase()) {
+        if (movies.length === 1) {
+          setStatus(StatusTypes.gameOver);
         } else {
-          setMessage(MessageTypes.niceJob);
+          setGuessCheckMessage(MessageTypes.niceJob);
           setGuess(MessageTypes.noMessage);
+          setHintOpen(false);
+          setHintTaken(false);
           setTimeout(() => {
-            setState({
-              ...state,
-              guessedRight: state.guessedRight + 1,
-              movies: state.movies.filter((movie) => {
-                return movie.title !== state.currentMovie!.title;
-              }),
-              currentMovie: getRandomMovie(state.movies),
-            });
-            setMessage(MessageTypes.noMessage);
+            setGuessedRight(guessedRight + 1);
+            setMovies(
+              movies.filter((movie) => {
+                return movie.title !== currentMovie!.title;
+              })
+            );
+            setCurrentMovie(getRandomMovie(movies));
+            setGuessCheckMessage(MessageTypes.noMessage);
           }, 500);
         }
       } else {
-        if (state.guessedWrong === 2) {
-          setState({
-            ...state,
-            status: StatusTypes.gameOver,
-          });
-        } else setState({ ...state, guessedWrong: state.guessedWrong + 1 });
-        setMessage(MessageTypes.tryAgain);
-        setGuess(MessageTypes.noMessage);
+        if (guessedWrong === 2) {
+          setStatus(StatusTypes.gameOver);
+        } else {
+          setGuessedWrong(guessedWrong + 1);
+          setGuessCheckMessage(MessageTypes.tryAgain);
+          setGuess(MessageTypes.noMessage);
+        }
       }
     }
   };
+
   return (
     <Grid item>
       <GameActionButton onClick={handleGuess}>Check Guess</GameActionButton>

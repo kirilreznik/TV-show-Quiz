@@ -1,14 +1,21 @@
 import { TextField, Grid } from "@mui/material";
+import { FC } from "react";
 
-const GuessInput = (props: {
+interface GuessInputProps {
   guess: string;
-  handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-}) => {
+  setGuess: React.Dispatch<React.SetStateAction<string>>;
+}
+
+const GuessInput: FC<GuessInputProps> = ({ guess, setGuess }) => {
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setGuess(event.target.value);
+  };
+
   return (
     <Grid item marginTop="7%">
       <TextField
         label="YOUR GUESS HERE"
-        value={props.guess}
+        value={guess}
         fullWidth
         focused
         inputProps={{
@@ -19,9 +26,10 @@ const GuessInput = (props: {
           },
         }}
         variant="standard"
-        onChange={props.handleChange}
+        onChange={handleChange}
       ></TextField>
     </Grid>
   );
 };
+
 export default GuessInput;
