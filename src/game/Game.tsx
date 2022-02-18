@@ -1,9 +1,6 @@
 import { useContext, FC, useEffect, useState } from "react";
 import FlipCard from "../components/flip-card/FlipCard";
 import { Grid } from "@mui/material";
-import HintButton from "./components/buttons/hint-button/HintButton";
-import CheckGuessButton from "./components/buttons/check-guess-button/CheckGuessButton";
-import StatisticsButton from "./components/buttons//statistics-button/StatisticsButton";
 import StatisticsAlert from "./components/statistics-alert/StatisticsAlert";
 import GuessInput from "./components/guess-input/GuessInput";
 import { StyledGrid, ButtonsGrid } from "./Game.styled";
@@ -14,6 +11,7 @@ import { MoviesContext } from "../context/MovieContext";
 import { GameContext } from "../context/GameContext";
 import getRandomMovie from "../utils/getRandomMovie";
 import hideString from "../utils/hideString";
+import { GameActionButton } from "../components/game-action-button/GameActionButton.styled";
 
 interface GameProps {
   setStatus: React.Dispatch<React.SetStateAction<StatusTypes>>;
@@ -26,6 +24,7 @@ const Game: FC<GameProps> = ({ setStatus, status }) => {
     MessageTypes.noMessage
   );
   const {
+    movies,
     hiddenString,
     currentMovie,
     setCurrentMovie,
@@ -33,7 +32,13 @@ const Game: FC<GameProps> = ({ setStatus, status }) => {
     setHiddenString,
   } = useContext(MoviesContext);
   const {
+    guessedRight,
+    guessedWrong,
+    numberOfHints,
+    isHintTaken,
     isHintOpen,
+    isStatsOpen,
+    setStatsOpen,
     setHintOpen,
     setHintTaken,
     setGuessedRight,
@@ -68,6 +73,53 @@ const Game: FC<GameProps> = ({ setStatus, status }) => {
     }
   }, [currentMovie]);
 
+  const handleHintClick = () => {
+    if (isHintTaken) {
+      setHintOpen(!isHintOpen);
+    } else if (!isHintTaken) {
+      setNumberOfHints(numberOfHints + 1);
+      setHintTaken(true);
+      setHintOpen(!isHintOpen);
+    }
+  };
+  const handleGuess = () => {
+    if (guess === "") {
+      setGuessCheckMessage(MessageTypes.noGuess);
+    } else {
+      if (guess.toLowerCase() === currentMovie!.title.toLowerCase()) {
+        if (movies.length === 1) {
+          setStatus(StatusTypes.gameOver);
+        } else {
+          setGuessCheckMessage(MessageTypes.niceJob);
+          setGuess(MessageTypes.noMessage);
+          setHintOpen(false);
+          setHintTaken(false);
+          setTimeout(() => {
+            setGuessedRight(guessedRight + 1);
+            setMovies(
+              movies.filter((movie) => {
+                return movie.title !== currentMovie!.title;
+              })
+            );
+            setCurrentMovie(getRandomMovie(movies));
+            setGuessCheckMessage(MessageTypes.noMessage);
+          }, 500);
+        }
+      } else {
+        if (guessedWrong === 2) {
+          setStatus(StatusTypes.gameOver);
+        } else {
+          setGuessedWrong(guessedWrong + 1);
+          setGuessCheckMessage(MessageTypes.tryAgain);
+          setGuess(MessageTypes.noMessage);
+        }
+      }
+    }
+  };
+  const toggleStats = () => {
+    setStatsOpen(!isStatsOpen);
+  };
+
   return (
     <StyledGrid container direction="column">
       <Grid item marginTop="10%">
@@ -80,16 +132,15 @@ const Game: FC<GameProps> = ({ setStatus, status }) => {
       <GuessInput guess={guess} setGuess={setGuess} />
       {guessCheckMessage && <ErrorMessage message={guessCheckMessage} />}
       <ButtonsGrid container spacing={2}>
-        <HintButton />
-        <CheckGuessButton
-          setStatus={setStatus}
-          message={guessCheckMessage}
-          setGuessCheckMessage={setGuessCheckMessage}
-          guess={guess}
-          setGuess={setGuess}
-        />
-
-        <StatisticsButton />
+        <Grid item>
+          <GameActionButton onClick={handleHintClick}>HINT</GameActionButton>
+        </Grid>
+        <Grid item>
+          <GameActionButton onClick={handleGuess}>CHECK GUESS</GameActionButton>
+        </Grid>
+        <Grid item>
+          <GameActionButton onClick={toggleStats}>STATISTICS</GameActionButton>
+        </Grid>
       </ButtonsGrid>
       {isHintOpen && <Hint hintText={currentMovie?.overview} />}
       <StatisticsAlert />

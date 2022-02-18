@@ -1,7 +1,7 @@
 import { FC, useContext } from "react";
 import FlipCard from "../flip-card/FlipCard";
 import { Grid } from "@mui/material";
-import StartAgainButton from "../../game/components/buttons/start-again-button/StartAgainButton";
+import { StyledStartAgainButton } from "../start-game-button/StartGameButton.styled";
 import { StyledGrid } from "../../game/Game.styled";
 import { StatusTypes } from "../../types/index";
 import { MoviesContext } from "../../context/MovieContext";
@@ -13,6 +13,10 @@ interface GameOverProps {
 const GameOver: FC<GameOverProps> = ({ setStatus }) => {
   const { movies } = useContext(MoviesContext);
   const message = movies.length === 1 ? "GOOD JOB" : "GAME OVER";
+
+  const handleStartGame = () => {
+    setStatus(StatusTypes.playing);
+  };
 
   return (
     <>
@@ -28,7 +32,9 @@ const GameOver: FC<GameOverProps> = ({ setStatus }) => {
             })}
           </Grid>
         </Grid>
-        <StartAgainButton setStatus={setStatus} />
+        <StyledStartAgainButton onClick={handleStartGame}>
+          PLAY AGIAN
+        </StyledStartAgainButton>
       </StyledGrid>
     </>
   );

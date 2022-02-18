@@ -1,4 +1,4 @@
-import StartGameButton from "../src/game/components/buttons/start-game-button/StartGameButton";
+import Header from "./game/components/header/Header";
 import { useState } from "react";
 import Game from "../src/game/Game";
 import GameOver from "./components/game-over/GameOver";
@@ -12,7 +12,7 @@ const App = () => {
     <GameState>
       <MoviesState>
         {status === StatusTypes.preGame && (
-          <StartGameButton setStatus={setStatus} />
+          <Header setStatus={setStatus}>PLAY NOW</Header>
         )}
         {status === StatusTypes.playing && (
           <Game setStatus={setStatus} status={status} />

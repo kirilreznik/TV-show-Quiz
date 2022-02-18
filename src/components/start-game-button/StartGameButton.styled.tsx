@@ -1,6 +1,10 @@
 import { styled } from "@mui/system";
 import { Button } from "@mui/material";
 
+export const StyledStartAgainButton = styled(Button)`
+  border-radius: 15px;
+  font-size: 1.5rem;
+`;
 export const StyledStartGameButton = styled(Button)`
   position: absolute;
   top: 60vh;

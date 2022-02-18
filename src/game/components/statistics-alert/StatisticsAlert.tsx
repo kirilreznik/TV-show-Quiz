@@ -5,7 +5,7 @@ import {
   DialogTitle,
 } from "@mui/material";
 import { Grid, Typography } from "@mui/material";
-import GameActionButton from "../../../components/game-action-button/GameActionButton";
+import { GameActionButton } from "../../../components/game-action-button/GameActionButton.styled";
 import { GridContainer } from "./Statistics.Alert.styled";
 import { useContext } from "react";
 import { GameContext } from "../../../context/GameContext";
